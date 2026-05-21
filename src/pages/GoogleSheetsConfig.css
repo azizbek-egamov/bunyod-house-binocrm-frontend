@@ -1,0 +1,1215 @@
+/* ==========================================
+   GOOGLE SHEETS INTEGRATION - Premium Design
+   ========================================== */
+
+.google-sheets-page {
+    padding: 24px;
+    min-height: 100vh;
+    width: 100%;
+    background: var(--bg-primary);
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Page Header */
+.google-sheets-page .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: fadeInDown 0.6s ease-out;
+    width: 100%;
+}
+
+.google-sheets-page .loading-state {
+    width: 100%;
+}
+
+.google-sheets-page .header-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.google-sheets-page .page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.google-sheets-page .page-subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 4px 0 0;
+}
+
+/* Header actions */
+.google-sheets-page .header-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+/* Common Buttons */
+.google-sheets-page .btn-primary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    animation: scaleIn 0.4s ease-out 0.1s backwards;
+}
+
+.google-sheets-page .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+.google-sheets-page .btn-secondary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: scaleIn 0.4s ease-out 0.15s backwards;
+}
+
+.google-sheets-page .btn-secondary:hover {
+    background: var(--bg-secondary);
+    border-color: var(--text-secondary);
+}
+
+.google-sheets-page .table-actions {
+    display: flex !important;
+    gap: 8px !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    height: 100% !important;
+    min-height: 36px;
+}
+
+.google-sheets-page .btn-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Custom Tooltip - Left side */
+.google-sheets-page .btn-icon::before,
+.google-sheets-page .btn-icon::after {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+.google-sheets-page .btn-icon::before {
+    content: attr(title);
+    right: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 6px 10px;
+    background: var(--bg-primary, #1e293b);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+}
+
+.google-sheets-page .btn-icon::after {
+    content: '';
+    right: calc(100% + 2px);
+    top: 50%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-left-color: var(--bg-primary, #1e293b);
+    z-index: 9999;
+}
+
+.google-sheets-page .btn-icon:hover::before,
+.google-sheets-page .btn-icon:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.google-sheets-page .btn-icon svg {
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px;
+    min-height: 18px;
+}
+
+.google-sheets-page .btn-sync {
+    background: rgba(139, 92, 246, 0.15);
+    color: #8b5cf6;
+}
+
+.google-sheets-page .btn-sync:hover:not(:disabled) {
+    background: rgba(139, 92, 246, 0.25);
+    transform: scale(1.05);
+}
+
+.google-sheets-page .btn-sync:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.google-sheets-page .btn-edit {
+    background: rgba(99, 102, 241, 0.1);
+    color: #6366f1;
+}
+
+.google-sheets-page .btn-edit:hover {
+    background: rgba(99, 102, 241, 0.2);
+    transform: scale(1.05);
+}
+
+.google-sheets-page .btn-delete {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.google-sheets-page .btn-delete:hover {
+    background: rgba(239, 68, 68, 0.2);
+    transform: scale(1.05);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.google-sheets-page .animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Content Card */
+.google-sheets-page .content-card {
+    background: var(--bg-primary);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    overflow: visible; /* Changed from hidden to prevent clipping of dropdowns */
+    box-shadow: var(--shadow-sm);
+    animation: fadeInUp 0.6s ease-out 0.2s backwards;
+    width: 100%;
+}
+
+/* If the card contains a table, clip overflow to preserve border-radius on table rows */
+.google-sheets-page .content-card:has(.table-container) {
+    overflow: hidden;
+}
+
+/* Width constraints for Create and Edit form pages */
+.google-sheets-form-page .page-header,
+.google-sheets-form-page .content-card,
+.google-sheets-form-page .loading-state {
+    max-width: 1300px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Table */
+.google-sheets-page .table-container {
+    overflow-x: auto;
+}
+
+.google-sheets-page .data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.google-sheets-page .data-table th {
+    padding: 16px 24px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.google-sheets-page .data-table td {
+    padding: 16px 24px;
+    font-size: 14px;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+.google-sheets-page .data-table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.google-sheets-page .data-table tbody tr:hover {
+    background: var(--bg-secondary);
+    transform: translateX(4px);
+}
+
+.google-sheets-page .sheet-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.google-sheets-page .sheet-link:hover {
+    color: var(--accent-primary-dark);
+    text-decoration: underline;
+}
+
+/* Status Badges */
+.google-sheets-page .status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.google-sheets-page .status-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.google-sheets-page .status-badge.active {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.google-sheets-page .status-badge.inactive {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+/* Actions Cell */
+.google-sheets-page .actions-cell {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Modal Form styling mapping */
+.google-sheets-modal-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.google-sheets-modal-form-full {
+    grid-column: span 2;
+}
+
+.google-sheets-modal-section-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-secondary);
+    margin-top: 16px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border-color);
+    grid-column: span 2;
+}
+
+.google-sheets-modal-section-subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: -8px;
+    margin-bottom: 12px;
+    grid-column: span 2;
+    line-height: 1.5;
+}
+
+/* Toggle row style mapping (for is_active checkbox) */
+.google-sheets-page .toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-top: 8px;
+    gap: 16px;
+    grid-column: span 2;
+}
+
+.google-sheets-page .toggle-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.google-sheets-page .toggle-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.google-sheets-page .toggle-sub {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.google-sheets-page .toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 26px;
+    flex-shrink: 0;
+}
+
+.google-sheets-page .toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.google-sheets-page .toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--border-color);
+    border-radius: 26px;
+    transition: 0.3s;
+}
+
+.google-sheets-page .toggle-slider::before {
+    content: '';
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.google-sheets-page .toggle-switch input:checked + .toggle-slider {
+    background: #10b981;
+}
+
+.google-sheets-page .toggle-switch input:checked + .toggle-slider::before {
+    transform: translateX(20px);
+}
+
+@media (max-width: 768px) {
+    .google-sheets-page .page-header {
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .google-sheets-page .header-actions {
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .google-sheets-modal-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .google-sheets-modal-form-full {
+        grid-column: span 1;
+    }
+
+    .google-sheets-modal-section-title {
+        grid-column: span 1;
+    }
+
+    .google-sheets-modal-section-subtitle {
+        grid-column: span 1;
+    }
+
+    .google-sheets-page .toggle-row {
+        grid-column: span 1;
+    }
+}
+
+/* Dark Mode support */
+[data-theme="dark"] .google-sheets-page .content-card {
+    background: var(--bg-secondary);
+}
+
+/* Mapping Component Styles */
+/* Mapping Component Styles */
+.mapping-card {
+    grid-column: span 2;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 28px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-sm);
+    max-width: 1300px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mapping-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 16px;
+}
+
+.mapping-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.mapping-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.mapping-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.mapping-toggle-btn {
+    font-size: 13px;
+    font-weight: 600;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    color: var(--primary-color);
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mapping-toggle-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+    transform: translateY(-1px);
+}
+
+.mapping-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.mapping-row {
+    display: grid;
+    grid-template-columns: 280px 80px 1fr;
+    align-items: center;
+    padding: 18px 24px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+}
+
+.mapping-row:hover,
+.mapping-row:focus-within {
+    z-index: 5;
+}
+
+.mapping-row:has(.multi-select-trigger.active) {
+    z-index: 10;
+}
+
+
+/* Individual Row Border Left Accents */
+.mapping-row:nth-child(1) {
+    border-left: 4px solid var(--primary-color);
+}
+.mapping-row:nth-child(1) .mapping-field-icon {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--primary-color);
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+.mapping-row:nth-child(2) {
+    border-left: 4px solid #10b981;
+}
+.mapping-row:nth-child(2) .mapping-field-icon {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+.mapping-row:nth-child(3) {
+    border-left: 4px solid #f59e0b;
+}
+.mapping-row:nth-child(3) .mapping-field-icon {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+    border-color: rgba(245, 158, 11, 0.2);
+}
+
+.mapping-row:nth-child(4) {
+    border-left: 4px solid #a855f7;
+}
+.mapping-row:nth-child(4) .mapping-field-icon {
+    background: rgba(168, 85, 247, 0.1);
+    color: #a855f7;
+    border-color: rgba(168, 85, 247, 0.2);
+}
+
+.mapping-row:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-md), 0 4px 20px rgba(99, 102, 241, 0.05);
+    transform: translateY(-2px);
+}
+
+/* Soft hover background highlight corresponding to the border color */
+.mapping-row:nth-child(1):hover {
+    background: linear-gradient(90deg, rgba(99, 102, 241, 0.03) 0%, var(--bg-secondary) 100%);
+    border-color: var(--primary-color);
+}
+.mapping-row:nth-child(2):hover {
+    background: linear-gradient(90deg, rgba(16, 185, 129, 0.03) 0%, var(--bg-secondary) 100%);
+    border-color: #10b981;
+}
+.mapping-row:nth-child(3):hover {
+    background: linear-gradient(90deg, rgba(245, 158, 11, 0.03) 0%, var(--bg-secondary) 100%);
+    border-color: #f59e0b;
+}
+.mapping-row:nth-child(4):hover {
+    background: linear-gradient(90deg, rgba(168, 85, 247, 0.03) 0%, var(--bg-secondary) 100%);
+    border-color: #a855f7;
+}
+
+.mapping-field-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.mapping-field-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.mapping-row:hover .mapping-field-icon {
+    transform: scale(1.05);
+}
+
+.mapping-field-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.mapping-field-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.mapping-field-type {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.mapping-arrow {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-tertiary);
+    height: 100%;
+}
+
+.mapping-arrow::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    right: -15px;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--border-color) 0px, var(--border-color) 4px, transparent 4px, transparent 8px);
+    z-index: 1;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.mapping-row:hover .mapping-arrow::before {
+    opacity: 1;
+    background: repeating-linear-gradient(90deg, var(--primary-color) 0px, var(--primary-color) 4px, transparent 4px, transparent 8px);
+}
+
+.mapping-arrow svg {
+    position: relative;
+    z-index: 2;
+    background: var(--bg-secondary);
+    padding: 6px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    color: var(--text-tertiary);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mapping-row:hover .mapping-arrow svg {
+    transform: translateX(6px);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+}
+
+/* Individual colors for arrow on hover matching row child */
+.mapping-row:nth-child(2):hover .mapping-arrow svg {
+    color: #10b981;
+    border-color: #10b981;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+}
+.mapping-row:nth-child(3):hover .mapping-arrow svg {
+    color: #f59e0b;
+    border-color: #f59e0b;
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+}
+.mapping-row:nth-child(4):hover .mapping-arrow svg {
+    color: #a855f7;
+    border-color: #a855f7;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
+}
+
+.mapping-selector {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.mapping-selector select,
+.mapping-selector input {
+    width: 100% !important;
+    margin: 0 !important;
+    height: 46px !important;
+    border-radius: 10px !important;
+    border: 2px solid var(--border-color) !important;
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    padding: 0 16px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+}
+
+.mapping-selector select:hover,
+.mapping-selector input:hover {
+    border-color: var(--text-tertiary) !important;
+}
+
+.mapping-selector select:focus,
+.mapping-selector input:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15) !important;
+    background: var(--bg-secondary) !important;
+}
+
+.mapping-row:nth-child(2) .mapping-selector select:focus,
+.mapping-row:nth-child(2) .mapping-selector input:focus {
+    border-color: #10b981 !important;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15) !important;
+}
+.mapping-row:nth-child(3) .mapping-selector select:focus,
+.mapping-row:nth-child(3) .mapping-selector input:focus {
+    border-color: #f59e0b !important;
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15) !important;
+}
+.mapping-row:nth-child(4) .mapping-selector select:focus,
+.mapping-row:nth-child(4) .mapping-selector input:focus {
+    border-color: #a855f7 !important;
+    box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.15) !important;
+}
+
+@media (max-width: 768px) {
+    .mapping-card {
+        padding: 16px;
+    }
+    
+    .mapping-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 16px;
+    }
+    
+    .mapping-arrow {
+        height: 30px;
+    }
+    
+    .mapping-arrow::before {
+        left: 50%;
+        right: auto;
+        width: 2px;
+        height: 40px;
+        top: -5px;
+        background: repeating-linear-gradient(180deg, var(--border-color) 0px, var(--border-color) 4px, transparent 4px, transparent 8px);
+    }
+    
+    .mapping-row:hover .mapping-arrow::before {
+        background: repeating-linear-gradient(180deg, var(--primary-color) 0px, var(--primary-color) 4px, transparent 4px, transparent 8px);
+    }
+    
+    .mapping-arrow svg {
+        transform: rotate(90deg);
+    }
+    
+    .mapping-row:hover .mapping-arrow svg {
+        transform: rotate(90deg) translateX(6px);
+    }
+}
+
+/* ==========================================
+   MULTI-SELECT DROPDOWN FOR IZOH USTUNI
+   ========================================== */
+.multi-select-container {
+    position: relative;
+    width: 100%;
+}
+
+.multi-select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 46px;
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    padding: 6px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.multi-select-trigger:hover {
+    border-color: var(--text-tertiary);
+}
+
+.multi-select-trigger.active {
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15);
+    background: var(--bg-secondary);
+}
+
+.multi-select-trigger .placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.selected-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    max-width: 90%;
+}
+
+.selected-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(245, 158, 11, 0.15);
+    color: #d97706; /* darker amber for contrast/readability */
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+[data-theme="dark"] .selected-tag {
+    color: #fbbf24; /* brighter amber for dark theme */
+    background: rgba(245, 158, 11, 0.25);
+}
+
+.remove-tag-btn {
+    background: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    transition: background-color 0.2s;
+    margin-left: 2px;
+}
+
+.remove-tag-btn:hover {
+    background: rgba(245, 158, 11, 0.2);
+}
+
+.dropdown-arrow-icon {
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    transition: transform 0.2s ease;
+    margin-left: 8px;
+}
+
+.multi-select-trigger.active .dropdown-arrow-icon {
+    transform: rotate(180deg);
+}
+
+.multi-select-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 100%;
+    max-height: 220px;
+    overflow-y: auto;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    z-index: 50;
+    padding: 6px;
+    box-sizing: border-box;
+    animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Thin scrollbar for standard browsers */
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
+}
+
+/* Custom scrollbar styling for webkit browsers */
+.multi-select-dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+
+.multi-select-dropdown::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.multi-select-dropdown::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+.multi-select-dropdown::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.multi-select-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.multi-select-option .option-label {
+    white-space: normal;
+    word-break: break-all;
+    overflow-wrap: anywhere;
+    flex: 1;
+    min-width: 0;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.multi-select-option:hover {
+    background: var(--bg-tertiary);
+}
+
+.multi-select-option.selected {
+    background: rgba(245, 158, 11, 0.08);
+    color: #d97706;
+    font-weight: 600;
+}
+
+[data-theme="dark"] .multi-select-option.selected {
+    color: #fbbf24;
+    background: rgba(245, 158, 11, 0.12);
+}
+
+.checkbox-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    color: white;
+    background: var(--bg-primary);
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.multi-select-option.selected .checkbox-icon {
+    background: #f59e0b;
+    border-color: #f59e0b;
+}
+
+/* Grouped List Page Styles */
+.google-sheets-page .status-badge.partial {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+}
+
+.tab-tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tab-tag {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+}
+
+.tab-tag.active {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.tab-tag.inactive {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.synced-rows-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.synced-row-item {
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.synced-row-tab {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.synced-row-count {
+    font-weight: 600;
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+/* Tabs checklist styles */
+.tabs-selection-container {
+    margin-top: 16px;
+}
+
+.tabs-checkbox-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.tab-checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.tab-checkbox-label:hover {
+    border-color: var(--text-tertiary);
+    transform: translateY(-1px);
+}
+
+.tab-checkbox-label.checked {
+    border-color: var(--primary-color);
+    background: rgba(99, 102, 241, 0.05);
+    color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.08);
+}
+
+.tab-checkbox-label input {
+    accent-color: var(--primary-color);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* Tabs headers styling inside configuration card */
+.tab-configs-container {
+    margin-top: 24px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+.tab-configs-headers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+.tab-config-header-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: transparent;
+    border: 2px solid transparent;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    top: 10px;
+}
+
+.tab-config-header-btn:hover {
+    color: var(--text-primary);
+}
+
+.tab-config-header-btn.active {
+    color: var(--primary-color);
+    border-color: var(--border-color) var(--border-color) var(--bg-secondary);
+    background: var(--bg-secondary);
+}
+
+.tab-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.tab-status-dot.active {
+    background-color: #10b981;
+}
+
+.tab-status-dot.inactive {
+    background-color: #ef4444;
+}
+
+.active-tab-indicator-badge {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--primary-color);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-left: 8px;
+    text-transform: uppercase;
+}
+
+
+
