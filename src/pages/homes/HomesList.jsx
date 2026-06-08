@@ -276,6 +276,14 @@ const HomesList = () => {
 
     // Open edit modal
     const handleEdit = (home) => {
+        if (home.status === 'SOLD') {
+            if (home.contract_id) {
+                navigate(`/contracts/${home.contract_id}/edit`);
+            } else {
+                toast.error("Sotilgan xonadonni tahrirlash yoki qayta band qilish mumkin emas");
+            }
+            return;
+        }
         const isBooked = home.status === 'BOOKED';
         setEditFormData({
             padez: home.padez || '',
@@ -424,6 +432,23 @@ const HomesList = () => {
                             title="Kattalashtirish uchun bosing"
                         >
                             <img src={home.floor_plan || home.cadastral_image} alt="Plan" />
+                        </div>
+                    )}
+                    {home.status === 'SOLD' && (
+                        <div className="tooltip-action-hint" style={{
+                            marginTop: '8px',
+                            paddingTop: '8px',
+                            borderTop: '1px dashed var(--border-color)',
+                            fontSize: '11px',
+                            fontWeight: '700',
+                            color: '#dc2626',
+                            textAlign: 'center',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '4px'
+                        }}>
+                            <span>📄 Shartnomani ko'rish uchun bosing</span>
                         </div>
                     )}
                 </div>
@@ -588,7 +613,7 @@ const HomesList = () => {
                                                                 <div
                                                                     key={home.id}
                                                                     className={`home-cell ${getStatusClass(home.status)}`}
-                                                                    onClick={() => handleEdit(home)}
+                                                                    onClick={() => handleRowClick(home)}
                                                                     onMouseEnter={(e) => handleMouseEnter(e, home)}
                                                                     onMouseLeave={handleMouseLeave}
                                                                 >
@@ -616,7 +641,7 @@ const HomesList = () => {
                                                                             <div
                                                                                 key={home.id}
                                                                                 className={`home-cell ${getStatusClass(home.status)}`}
-                                                                                onClick={() => handleEdit(home)}
+                                                                                onClick={() => handleRowClick(home)}
                                                                                 onMouseEnter={(e) => handleMouseEnter(e, home)}
                                                                                 onMouseLeave={handleMouseLeave}
                                                                             >

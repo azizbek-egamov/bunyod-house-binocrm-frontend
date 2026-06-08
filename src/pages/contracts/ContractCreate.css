@@ -452,17 +452,31 @@ textarea.form-control {
 }
 
 .home-cell.sold {
-    border-color: #ef4444;
-    color: #ef4444;
-    background: rgba(239, 68, 68, 0.08);
+    border-color: #dc2626;
+    color: #b91c1c;
+    background: rgba(239, 68, 68, 0.15);
+    font-weight: 800;
     cursor: not-allowed;
 }
 
+[data-theme="dark"] .home-cell.sold {
+    border-color: #f87171;
+    color: #fca5a5;
+    background: rgba(239, 68, 68, 0.1);
+}
+
 .home-cell.booked {
-    border-color: #f59e0b;
-    color: #f59e0b;
-    background: rgba(245, 158, 11, 0.08);
+    border-color: #d97706;
+    color: #b45309;
+    background: rgba(245, 158, 11, 0.15);
+    font-weight: 800;
     cursor: not-allowed;
+}
+
+[data-theme="dark"] .home-cell.booked {
+    border-color: #fbbf24;
+    color: #fde047;
+    background: rgba(245, 158, 11, 0.1);
 }
 
 .home-cell.unavailable {
@@ -623,13 +637,25 @@ textarea.form-control {
 }
 
 .status-badge.sold {
-    background: rgba(239, 68, 68, 0.1);
-    color: #ef4444;
+    background: rgba(239, 68, 68, 0.16);
+    color: #b91c1c;
+    font-weight: 700;
+}
+
+[data-theme="dark"] .status-badge.sold {
+    background: rgba(239, 68, 68, 0.15);
+    color: #fca5a5;
 }
 
 .status-badge.booked {
-    background: rgba(245, 158, 11, 0.1);
-    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.18);
+    color: #b45309;
+    font-weight: 700;
+}
+
+[data-theme="dark"] .status-badge.booked {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fde047;
 }
 
 /* Selected Home Info */

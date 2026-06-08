@@ -365,18 +365,29 @@
 }
 
 .status-sold {
-    background: rgba(239, 68, 68, 0.1);
-    color: #ef4444;
+    background: rgba(220, 38, 38, 0.18);
+    color: #991b1b;
+    font-weight: 700;
+    border: 1px solid rgba(220, 38, 38, 0.3);
+}
+
+[data-theme="dark"] .status-sold {
+    background: rgba(239, 68, 68, 0.15);
+    color: #fca5a5;
+    border-color: rgba(239, 68, 68, 0.2);
 }
 
 .status-booked {
-    background: rgba(245, 158, 11, 0.1);
-    color: #f59e0b;
+    background: rgba(217, 119, 6, 0.18);
+    color: #92400e;
+    font-weight: 700;
+    border: 1px solid rgba(217, 119, 6, 0.3);
 }
 
-.status-unavailable {
-    background: rgba(100, 116, 139, 0.1);
-    color: #64748b;
+[data-theme="dark"] .status-booked {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fde047;
+    border-color: rgba(245, 158, 11, 0.2);
 }
 
 /* Modals are global in modals.css */
@@ -1531,25 +1542,68 @@
 }
 
 .home-cell.sold {
-    border-color: #ef4444;
-    color: #ef4444;
-    background: rgba(239, 68, 68, 0.05);
+    border-color: #dc2626;
+    border-width: 2.5px;
+    color: #991b1b;
+    background: rgba(239, 68, 68, 0.28);
+    font-weight: 800;
+    cursor: pointer;
+    position: relative;
+}
+
+[data-theme="dark"] .home-cell.sold {
+    border-color: #f87171;
+    color: #fca5a5;
+    background: rgba(239, 68, 68, 0.18);
 }
 
 .home-cell.sold:hover {
-    background: #ef4444;
+    background: #dc2626;
     color: white;
+    border-color: #991b1b;
+    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.45);
+    transform: translateY(-3px) scale(1.12);
+    z-index: 20;
+}
+
+.home-cell.sold:hover::after {
+    content: '→ Shartnoma';
+    position: absolute;
+    bottom: -26px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #991b1b;
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 100;
+    letter-spacing: 0.3px;
 }
 
 .home-cell.booked {
-    border-color: #f59e0b;
-    color: #f59e0b;
-    background: rgba(245, 158, 11, 0.05);
+    border-color: #d97706;
+    border-width: 2.5px;
+    color: #92400e;
+    background: rgba(245, 158, 11, 0.25);
+    font-weight: 800;
+}
+
+[data-theme="dark"] .home-cell.booked {
+    border-color: #fbbf24;
+    color: #fde047;
+    background: rgba(245, 158, 11, 0.15);
 }
 
 .home-cell.booked:hover {
-    background: #f59e0b;
+    background: #d97706;
     color: white;
+    border-color: #92400e;
+    box-shadow: 0 4px 16px rgba(217, 119, 6, 0.4);
+    transform: translateY(-3px) scale(1.1);
 }
 
 .home-cell.unavailable {
