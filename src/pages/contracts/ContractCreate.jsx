@@ -61,7 +61,7 @@ const ContractCreate = () => {
     if (!clientData.phone || clientData.phone.length < 9) {
       errors.phone = "Telefon raqami 9 ta raqamdan iborat bo'lishi kerak";
     }
-    if (!clientData.passport_series || clientData.passport_series.length < 10) {
+    if (!clientData.passport_series || clientData.passport_series.length < 9) {
       errors.passport_series = "Passport to'liq kiritilishi kerak (AA 1234567)";
     }
     if (!clientData.passport_date) {
@@ -101,7 +101,7 @@ const ContractCreate = () => {
       !paymentData._hasErrors &&
       clientData.full_name.trim() &&
       clientData.phone.length >= 9 &&
-      clientData.passport_series.length >= 10 &&
+      clientData.passport_series.length >= 9 &&
       clientData.passport_date &&
       clientData.address.trim() &&
       (paymentData.initial_payment >= paymentData.total_price ||

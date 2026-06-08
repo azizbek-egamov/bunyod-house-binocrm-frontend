@@ -72,7 +72,7 @@ const ClientForm = ({ formData, onChange }) => {
     };
 
     const phoneError = getError('phone', formData.phone && formData.phone.length < 9, "9 ta raqam kerak");
-    const passportError = getError('passport_series', formData.passport_series && formData.passport_series.length < 10, "AA 1234567 formatida kiriting");
+    const passportError = getError('passport_series', formData.passport_series && formData.passport_series.length < 9, "AA 1234567 formatida kiriting");
     const dateError = getError('passport_date', formData.passport_date && formData.passport_date.length < 10, "KK.OO.YYYY formatida kiriting");
 
     return (

@@ -203,7 +203,7 @@ const ContractEdit = () => {
       errors.full_name = "To'liq ism kiritilishi shart";
     if (!clientData.phone || clientData.phone.length < 9)
       errors.phone = "Telefon raqami 9 ta raqamdan iborat bo'lishi kerak";
-    if (!clientData.passport_series || clientData.passport_series.length < 10)
+    if (!clientData.passport_series || clientData.passport_series.length < 9)
       errors.passport_series = "Passport to'liq kiritilishi kerak (AA 1234567)";
     if (!clientData.passport_date)
       errors.passport_date = "Passport berilgan sana kiritilishi shart";
@@ -212,13 +212,23 @@ const ContractEdit = () => {
 
     // Payment validation
     const termMonths = parseInt(paymentData.term_months) || 0;
-    if (termMonths < 1 || termMonths > 120) {
-      if (
-        paymentData.status !== "cancelled" &&
-        paymentData.status !== "completed"
-      ) {
-        errors.term_months =
-          "To'lov muddati 1-120 oy oralig'ida bo'lishi kerak";
+    const total = paymentData.total_price || 0;
+    const initial = paymentData.initial_payment || 0;
+
+    if (
+      paymentData.status !== "cancelled" &&
+      paymentData.status !== "completed" &&
+      paymentData.status !== "paid"
+    ) {
+      if (initial < total) {
+        if (termMonths < 1 || termMonths > 120) {
+          errors.term_months =
+            "To'lov muddati 1-120 oy oralig'ida bo'lishi kerak";
+        }
+      } else if (initial === total) {
+        if (termMonths < 0 || termMonths > 120) {
+          errors.term_months = "To'lov muddati noto'g'ri";
+        }
       }
     }
 
@@ -233,7 +243,7 @@ const ContractEdit = () => {
       numberValidation.available &&
       clientData.full_name.trim() &&
       clientData.phone.length >= 9 &&
-      clientData.passport_series.length >= 10 &&
+      clientData.passport_series.length >= 9 &&
       clientData.passport_date
     );
   }, [
