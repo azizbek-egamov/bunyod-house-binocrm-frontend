@@ -1,23 +1,16 @@
 import axios from "axios";
+import apiDomains from "../api_config.json";
 
 let API_URL = "http://localhost:8000/api";
 
 try {
-  const domainsRaw = import.meta.env.VITE_API_DOMAINS;
+  const currentHost = window.location.hostname;
 
-  if (domainsRaw) {
-    const apiDomains = JSON.parse(domainsRaw);
-    const currentHost = window.location.hostname;
-
-    // Matched loop using Object.entries
-    for (const [domain, apiUrl] of Object.entries(apiDomains)) {
-      if (currentHost.includes(domain)) {
-        API_URL = apiUrl;
-        break;
-      }
+  for (const [domain, apiUrl] of Object.entries(apiDomains)) {
+    if (currentHost.includes(domain)) {
+      API_URL = apiUrl;
+      break;
     }
-  } else if (import.meta.env.VITE_API_URL) {
-    API_URL = import.meta.env.VITE_API_URL;
   }
 } catch (error) {
   console.error("Error setting API URL:", error);

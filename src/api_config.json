@@ -1,0 +1,6 @@
+{
+  "bunyod-house.ardentsoft.uz": "https://bunyod-house.api.ardentsoft.uz/api",
+  "bunyod-2.ardentsoft.uz": "https://bunyod-2.api.ardentsoft.uz/api",
+  "localhost": "http://localhost:8000/api",
+  "127.0.0.1": "http://localhost:8000/api"
+}

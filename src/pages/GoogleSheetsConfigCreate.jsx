@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { googleSheetsService } from "../services/googleSheets";
 import { getUsers } from "../services/users";
+import { leadService } from "../services/leads";
 import "./GoogleSheetsConfig.css";
 
 const GoogleSheetsConfigCreate = () => {
   const navigate = useNavigate();
   const [operators, setOperators] = useState([]);
+  const [stages, setStages] = useState([]);
   const [saving, setSaving] = useState(false);
 
   // General spreadsheet info
@@ -39,6 +41,7 @@ const GoogleSheetsConfigCreate = () => {
 
   useEffect(() => {
     fetchOperators();
+    fetchStages();
   }, []);
 
   const fetchOperators = async () => {
@@ -49,6 +52,17 @@ const GoogleSheetsConfigCreate = () => {
     } catch (error) {
       console.error("Failed to load operators:", error);
       toast.error("Operatorlarni yuklashda xatolik yuz berdi");
+    }
+  };
+
+  const fetchStages = async () => {
+    try {
+      const res = await leadService.getStages();
+      const data = Array.isArray(res.data) ? res.data : res.data.results || [];
+      setStages(data);
+    } catch (error) {
+      console.error("Failed to load stages:", error);
+      toast.error("Lead bosqichlarini yuklashda xatolik yuz berdi");
     }
   };
 
@@ -79,6 +93,7 @@ const GoogleSheetsConfigCreate = () => {
               note_col: "",
               source_col: "",
               operator: "",
+              stage: "",
               is_active: true,
               columns: res.columns || [],
               loadingColumns: false,
@@ -144,6 +159,7 @@ const GoogleSheetsConfigCreate = () => {
             note_col: "",
             source_col: "",
             operator: "",
+            stage: "",
             is_active: true,
             columns: [],
             loadingColumns: false,
@@ -235,6 +251,7 @@ const GoogleSheetsConfigCreate = () => {
           note_col: mapping.note_col,
           source_col: mapping.source_col,
           operator: mapping.operator ? parseInt(mapping.operator) : null,
+          stage: mapping.stage ? parseInt(mapping.stage) : null,
         };
         return googleSheetsService.createConfig(dataToSend);
       });
@@ -368,6 +385,21 @@ const GoogleSheetsConfigCreate = () => {
                       {operators.map((op) => (
                         <option key={op.id} value={op.id}>
                           {op.first_name} {op.last_name} (@{op.username})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label>Tushadigan Bosqich (Stage)</label>
+                    <select
+                      value={activeMapping.stage}
+                      onChange={(e) => handleMappingChange("stage", e.target.value)}
+                    >
+                      <option value="">-- Standart ({stages[0]?.name || "Yangi arizalar"}) --</option>
+                      {stages.map((stg) => (
+                        <option key={stg.id} value={stg.id}>
+                          {stg.name}
                         </option>
                       ))}
                     </select>
